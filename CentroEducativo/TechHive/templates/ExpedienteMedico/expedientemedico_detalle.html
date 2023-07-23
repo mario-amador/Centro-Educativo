@@ -1,0 +1,47 @@
+expedientemedico_detalle.html
+
+
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalles del Expediente Médico del Alumno</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><span class=> Grado: </span> <br> {{expedientemedico.Grado}}</p>
+      <p><span class=> Nombre del Alumno: </span> <br> {{expedientemedico.Alumno}}</p>
+      <p><span class=> Nombre del Tutor: </span> <br> {{expedientemedico.Tutor}}</p>
+      <p><span class=> Nombre de la Enfermedad Cronica 1: </span> <br> {{expedientemedico.EnfermedadCronica1}}</p>
+      <p><span class=> Nombre de la Enfermedad Cronica 2: </span> <br> {{expedientemedico.EnfermedadCronica2}}</p>
+      <p><span class=> Nombre de la Enfermedad Cronica 3: </span> <br> {{expedientemedico.EnfermedadCronica3}}</p>
+      <p><span class=> Nombre del Medicamento Uso Diario 1: </span> <br> {{expedientemedico.MedicamentoUsoDiario1}}</p>
+      <p><span class=> Nombre del Medicamento Uso Diario 2: </span> <br> {{expedientemedico.MedicamentoUsoDiario2}}</p>
+      <p><span class=> Nombre de la Alergia 1: </span> <br> {{expedientemedico.Alergia1}}</p>
+      <p><span class=> Nombre de la Alergia 2: </span> <br> {{expedientemedico.Alergia2}}</p>
+      <p><span class=> Nombre de la Alergia e: </span> <br> {{expedientemedico.Alergia3}}</p>
+ 
+    <a href="{%  url 'expedientemedico_listar' %}" type="submit" class="btn btn-primary">
+    <i class="fas fa-reply"></i> Volver</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>

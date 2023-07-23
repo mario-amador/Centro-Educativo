@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalles de las Notas del Alumno</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><span class=> Asignatura </span> <br> {{notaalumno.FechaInicio}}</p>
+      <p><span class=> Parcial Académicos: </span> <br> {{notaalumno.ParcialAcademico}}</p>
+      <p><span class=> Nombre del Alumno: </span> <br> {{notaalumno.Alumno}}</p>
+      <p><span class=> Nota Acumulativo: </span> <br> {{notaalumno.NotaAcumulativo}}</p>
+      <p><span class=> Nota Examen: </span> <br> {{notaalumno.NotaExamen}}</p>
+      <p><span class=> Nota Final: </span> <br> {{notaalumno.NotaFinal}}</p>
+      <p><span class=> Promedio de la Clase: </span> <br> {{notaalumno.PromedioClasel}}</p>
+ 
+    <a href="{%  url 'horarios_listar' %}" type="submit" class="btn btn-primary">
+    <i class="fas fa-reply"></i> Volver</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>

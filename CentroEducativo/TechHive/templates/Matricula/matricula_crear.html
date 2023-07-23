@@ -1,0 +1,352 @@
+{% extends "base/base.html" %}
+{% block barra_izquierda %}
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+          
+       <!-- Sidebar - Brand -->
+       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% if request.user.is_authenticated and request.user.usuario.rol.nombre == 'Administrador' %}{% url 'bienvenida_administrador' %}{% elif request.user.is_authenticated and request.user.usuario.rol.nombre == 'Alumno' %}{% url 'bienvenida_alumno' %}{% elif request.user.is_authenticated and request.user.usuario.rol.nombre == 'Catedratico' %}{% url 'bienvenida_catedratico' %}{% else %}#{% endif %}">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">TechHive</div>
+    </a>
+    
+
+        <!-- Nav Item - Dashboard -->
+        
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'bienvenida_administrador' %}">
+                    <i class="fas fa-school" style="color: #ff9933;"></i> Inicio
+                </a>
+            </li>
+            
+            
+                
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            </div>
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Utilities:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Colors</a>
+                    <a class="collapse-item" href="utilities-border.html">Borders</a>
+                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div >
+        </div>
+
+       
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'bienvenida_administrador' %}" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Paginas</span>
+            </a>
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'usuario_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Usuarios</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'alumno_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Alumnos</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'listar_catedraticos' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Catedraticos</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'listar_empleados' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Empleados</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'tutor_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Tutores</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'matricula_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Matricula</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'expedientemedico_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Expedientes Medicos</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'expedienteescolar_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Expedientes Escolar</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'parciales_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Parciales</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'niveles_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Niveles</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'notas_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Notas</h6>
+                    </a>
+                </button>
+            </div>
+
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
+                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
+                    <a href="{% url 'horarios_listar' %}" class="text-white">
+                        <h6 class="m-0 font-weight-normal">Horarios</h6>
+                    </a>
+                </button>
+            </div>
+
+        </li>        
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    {% endblock barra_izquierda %}
+{% block barra_arriba %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Search -->
+   
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+       
+            <!-- Dropdown - Messages -->
+            
+
+        <!-- Nav Item - Messages -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'bienvenida_administrador' %}">
+                <i class="fas fa-school" style="color: #ff9933;"></i>
+            </a>
+        </li>
+                
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                    Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                            alt="...">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                            problem I've been having.</div>
+                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                            alt="...">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">I have the photos that you ordered last month, how
+                            would you like them sent to you?</div>
+                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                            alt="...">
+                        <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                            the progress so far, keep up the good work!</div>
+                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                            alt="...">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                            told me that people say this to all dogs, even if they aren't good...</div>
+                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+            </div>
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
+                <i class="fas fa-user-circle" style="color: #007bff;"></i> 
+
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar Secion
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->
+{% endblock barra_arriba %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Agregar una nueva Matrícula</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">ACCIONES:</div>
+                <a class="dropdown-item" href="{%  url 'notas_listar' %}">Lista de Matriculas</a>
+            </div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agregar Matrícula</title>
+  </head>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" value="submit" class="btn btn-success">
+        <i class="fas fa-save"></i> Guardar</button>
+      <a href="{% url 'matricula_listar' %}" class="btn btn-secondary">
+        <i class="fas fa-times"></i> Cancelar</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>

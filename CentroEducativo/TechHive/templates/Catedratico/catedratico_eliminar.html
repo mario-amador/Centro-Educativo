@@ -1,0 +1,32 @@
+
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+<div class="card-body">
+    <h1>¿Estás seguro de que deseas eliminar el Catedratico?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="Id" value="{{ catedratico.id }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="Nombre" value="{{ catedratico.NombresCatedratico }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="Apellido" value="{{ catedratico.ApellidosCatedratico }}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'listar_catedraticos' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function mensaje() {
+        alert("¿Seguro que desea eliminar?");
+    }
+</script>
+{% endblock pagina_contenido %}

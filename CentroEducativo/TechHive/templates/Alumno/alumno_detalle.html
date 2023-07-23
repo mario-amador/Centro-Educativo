@@ -1,0 +1,47 @@
+
+{% extends "base/base.html" %}
+{% block barra_arriba %}
+{% endblock barra_arriba %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalles del Alumno</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><span class=> Nombres del Alumno: </span> <br> {{alumno.NombresAlumno}}</p>
+      <p><span class=> Apellidos del Alumno: </span> <br> {{alumno.ApellidosAlumno}}</p>
+      <p><span class=> Tipo de Documento: </span> <br> {{alumno.DocumentoDPI}}</p>
+      <p><span class=> Documento: </span> <br> {{alumno.DPI}}</p>
+      <p><span class=> Fecha de Nacimiento del Alumno: </span> <br> {{alumno.FechaNacimientoAlumno}}</p>
+      <p><span class=> Dirección del Alumno: </span> <br> {{alumno.DireccionAlumno}}</p>
+      <p><span class=> Departamento: </span> <br> {{alumno.Departamento}}</p>
+      <p><span class=> Municipio: </span> <br> {{alumno.Municipio}}</p>
+      <p><span class=> Grado: </span> <br> {{alumno.Grado}}</p>
+      <p><span class=> Sección: </span> <br> {{alumno.Seccion}}</p>
+      <p><span class=> Tipo de Sangre: </span> <br> {{alumno.TipoSanguineo}}</p>
+ 
+    <a href="{%  url 'alumno_listar' %}" type="submit" class="btn btn-primary">
+    <i class="fas fa-reply"></i> Volver</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>

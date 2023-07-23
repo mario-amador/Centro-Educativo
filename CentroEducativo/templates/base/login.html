@@ -1,0 +1,150 @@
+
+{% extends "base/base.html" %}
+
+{% block barra_izquierda %} {% endblock barra_izquierda %}
+{% block barra_arriba %} {% endblock barra_arriba %}
+{% block footer %}{% endblock footer %}
+{% block pagina_contenido %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('/static/base/img/fondo.jpeg'); /* Ruta de la imagen de fondo */
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container-fluid {
+        height: 100vh;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.5); /* Fondo del cuadro transparente */
+        backdrop-filter: blur(10px); /* Efecto de desenfoque para un aspecto más suave */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: transparent;
+        border-bottom: none;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente de los campos */
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #343a40;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+    }
+
+    .btn-primary:hover {
+        background-color: #1a1c20;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-transparent text-center">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1 class="h4 mb-0"><strong>Iniciar sesión</strong></h1>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="username" class="form-control" placeholder="Usuario" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Acceder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function mostrarAlerta(titulo, mensaje, tipo) {
+            Swal.fire({
+                title: titulo,
+                text: mensaje,
+                icon: tipo,
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    
+        function login() {
+            // Obtener los valores de usuario y contraseña
+            var username = document.getElementById("id_username").value;
+            var password = document.getElementById("id_password").value;
+    
+            // Realizar una petición al servidor para verificar las credenciales
+            fetch('/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // El login fue exitoso, mostrar una alerta de éxito
+                    mostrarAlerta('¡Éxito!', 'Inicio de sesión exitoso', 'success');
+                    window.location.href = "/bienvenida/";  // Redirigir a la página de bienvenida
+                } else {
+                    // Mostrar una alerta de error
+                    mostrarAlerta('¡Error!', 'Credenciales incorrectas', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+{% endblock pagina_contenido %}

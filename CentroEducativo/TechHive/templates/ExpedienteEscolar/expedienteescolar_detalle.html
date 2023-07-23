@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% block barra_arriba %}
+{% endblock barra_arriba %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalles del Expediente Escolar del Alumno</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><span class=> Actitud del Alumno: </span> <br> {{expedienteescolar.Actitud}}</p>
+      <p><span class=> Nombres del Alumno: </span> <br> {{expedienteescolar.Alumno}}</p>
+      <p><span class=> Instituto Anterior del Alumno: </span> <br> {{expedienteescolar.InstitutoAnterior}}</p>
+      <p><span class=> Promedio Anual Anterior del Alumno: </span> <br> {{expedienteescola.PromedioAnualAnterior}}</p>
+      <p><span class=> Nombre del Tutor: </span> <br> {{expedienteescola.Tutor}}</p>
+ 
+    <a href="{%  url 'expedienteescolar_listar' %}" type="submit" class="btn btn-primary">
+    <i class="fas fa-reply"></i> Volver</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>
