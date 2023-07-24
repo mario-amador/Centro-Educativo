@@ -23,14 +23,6 @@
 
         <!-- Heading -->
         <div>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'bienvenida_administrador' %}">
-                    <i class="fas fa-school" style="color: #ff9933;"></i> Inicio
-                </a>
-            </li>
-            
-            
-                
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -62,122 +54,7 @@
         </div>
 
        
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'bienvenida_administrador' %}" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Paginas</span>
-            </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'usuario_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Usuarios</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'alumno_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Alumnos</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'listar_catedraticos' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Catedraticos</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'listar_empleados' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Empleados</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'tutor_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Tutores</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'matricula_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Matricula</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'expedientemedico_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Expedientes Medicos</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'expedienteescolar_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Expedientes Escolar</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'parciales_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Parciales</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'niveles_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Niveles</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'notas_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Notas</h6>
-                    </a>
-                </button>
-            </div>
-
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <button class="bg-transparent border-0 py-1 collapse-inner rounded">
-                    <a href="{% url 'horarios_listar' %}" class="text-white">
-                        <h6 class="m-0 font-weight-normal">Horarios</h6>
-                    </a>
-                </button>
-            </div>
-
-        </li>        
+        <!-- Nav Item - Pages Collapse Menu -->      
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
@@ -199,7 +76,7 @@
 
     </ul>
     {% endblock barra_izquierda %}
-{% block barra_arriba %}
+    {% block barra_arriba %}
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -209,21 +86,52 @@
     </button>
 
     <!-- Topbar Search -->
-   
+    <form
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
-       
+        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
             <!-- Dropdown - Messages -->
-            
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small"
+                            placeholder="Search for..." aria-label="Search"
+                            aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
 
         <!-- Nav Item - Messages -->
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'bienvenida_administrador' %}">
-                <i class="fas fa-school" style="color: #ff9933;"></i>
-            </a>
-        </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'bienvenida_administrador' %}">
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
                 
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -290,12 +198,24 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
-                <i class="fas fa-user-circle" style="color: #007bff;"></i> 
+                <i class="far fa-user-circle"></i>
 
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Usuario
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Configuraciones
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -308,7 +228,7 @@
 
 </nav>
 <!-- End of Topbar -->
-{% endblock barra_arriba %}
+ {% endblock barra_arriba %}
 {% block pagina_contenido %}
    <!-- Dropdown Card Example -->
    <div class="card shadow mb-4">
@@ -336,7 +256,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombres del Grado</th>
+                        <th>Nombre del Grado</th>
                         <th>Nivel Educativo</th>
                         <th>Acciones</th>
                     </tr>
