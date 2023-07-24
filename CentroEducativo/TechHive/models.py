@@ -231,12 +231,21 @@ class ParametrosSAR(models.Model):
         return self.CAI
 
 class Facturacion(models.Model):
+    NumeroFactura = models.CharField(max_length=20)
+    Fecha = models.DateField()
     ParametrosSAR = models.ForeignKey(ParametrosSAR, on_delete=models.CASCADE)
     CentroEducativo = models.CharField(max_length=100)
     Pagos = models.ForeignKey(Pagos, on_delete=models.CASCADE)
+    ImporteExonerado = models.DecimalField(max_digits=6, decimal_places=2)
+    ImporteExcento = models.DecimalField(max_digits=6, decimal_places=2)
+    ImporteGravado15 = models.DecimalField(max_digits=6, decimal_places=2)
+    ImporteGravado18 = models.DecimalField(max_digits=6, decimal_places=2)
+    ImpuestoSobreVenta15 = models.DecimalField(max_digits=6, decimal_places=2)
+    ImpuestoSobreVenta18 = models.DecimalField(max_digits=6, decimal_places=2)
+    Total = models.DecimalField(max_digits=6, decimal_places=2)
     
     def __str__(self):
-        return f"{self.CentroEducativo} {self.Pagos}"
+        return f"{self.CentroEducativo} {self.ParametrosSAR} {self.NumeroFactura} {self.Pagos} {self.ImporteExonerado} {self.ImporteExcento} {self.ImporteGravado15} {self.ImporteGravado18} {self.ImpuestoSobreVenta15} {self.ImpuestoSobreVenta18} {self.Total}"
     
 class Reportes(models.Model):
     TipoReporte = models.ForeignKey(TipoReporte, on_delete=models.CASCADE)
