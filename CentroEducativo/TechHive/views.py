@@ -585,7 +585,7 @@ class GradoDetailView(DetailView):
 
 class GradoUpdateView(UpdateView):
     model = Grado
-    form_class = TutorForm
+    form_class = GradoForm
     template_name = 'Grado/grado_editar.html'
     success_url = reverse_lazy('grado_listar')
 
