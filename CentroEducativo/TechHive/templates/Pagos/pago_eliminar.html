@@ -1,0 +1,50 @@
+
+
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+
+<div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        <h1>¿Estás seguro de que deseas eliminar el pago?</h1>
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="ID" name="Id" value="{{ pago.idPago }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="tutor">Tutor:</label>
+            <input type="text" id="tutor" name="Tutor" value="{{ pago.Tutor }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="alumno">Alumno:</label>
+            <input type="text" id="alumno" name="Alumno" value="{{ pago.Alumno }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="fechapago">Fecha de pago:</label>
+            <input type="text" id="fechadepago" name="fechapago" value="{{ pago.FechaPago }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="tipopago">Tipo de pago:</label>
+            <input type="text" id="tipodepago" name="TipoPago" value="{{ pago.TipoPago }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="mes">Mes:</label>
+            <input type="text" id="meses" name="meses" value="{{ pago.Meses }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="horapago">Hora de pago:</label>
+            <input type="text" id="hora" name="Hora" value="{{ pago.HoraPago}}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'pago_listar' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+
+    <script>
+        function mensaje() {
+            alert("¿Seguro que desea eliminar?");
+        }
+    </script>
+</div>
+{% endblock pagina_contenido %}
