@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import ExpedienteEscolarCreateView, ExpedienteEscolarDeleteView, ExpedienteEscolarDetailView, ExpedienteEscolarListView, ExpedienteEscolarUpdateView, GradoCreateView, GradoDeleteView, GradoDetailView, GradoListView, GradoUpdateView, HorariosDetailView, NivelesDetailView, NotasDetailView, ParcialesDetailView, UsuarioDetailView, AlumnoListView, AlumnoCreateView, AlumnoDetailView, AlumnoUpdateView, AlumnoDeleteView, BienvenidaAdministradorView, BienvenidaAlumnoView, BienvenidaCatedraticoView, CatedraticoCreateView,InicioPantalla, CatedraticoDeleteView, CatedraticoListView, CatedraticoDetailView, CatedraticoUpdateView,EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView, UsuarioCreateView, UsuarioDeleteView, UsuarioListView, UsuarioUpdateView, TutorListView, TutorCreateView, TutorDetailView, TutorUpdateView, TutorDeleteView, AsignaturaForm, AsignaturaListView, AsignaturaCreateView, AsignaturaDetailView, AsignaturaUpdateView, AsignaturaDeleteView, MatriculaListView, MatriculaCreateView, MatriculaDetailView, MatriculaUpdateView, MatriculaDeleteView, ReportesListView, ReportesCreateView, ReportesDetailView, ReportesUpdateView, ReportesDeleteView, ExpedienteMedicoListView, ExpedienteMedicoCreateView, ExpedienteMedicoDetailView, ExpedienteMedicoUpdateView, ExpedienteMedicoDeleteView, load_municipios, login_view, HorariosCreateView, HorariosDeleteView, HorariosListView, HorariosUpdateView, NivelesCreateView, NivelesListView, NivelesDeleteView, NivelesUpdateView, ParcialesListView, ParcialesCreateView, ParcialesDeleteView, ParcialesUpdateView, NotasCreateView, NotasDeleteView, NotasListView, NotasUpdateView
+from .views import ExpedienteEscolarCreateView, ExpedienteEscolarDeleteView, ExpedienteEscolarDetailView, ExpedienteEscolarListView, ExpedienteEscolarUpdateView, GradoCreateView, GradoDeleteView, GradoDetailView, GradoListView, GradoUpdateView, HorariosDetailView, NivelesDetailView, NotasDetailView, ParcialesDetailView, UsuarioDetailView, AlumnoListView, AlumnoCreateView, AlumnoDetailView, AlumnoUpdateView, AlumnoDeleteView, BienvenidaAdministradorView, BienvenidaAlumnoView, BienvenidaCatedraticoView, CatedraticoCreateView,InicioPantalla, CatedraticoDeleteView, CatedraticoListView, CatedraticoDetailView, CatedraticoUpdateView,EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView, UsuarioCreateView, UsuarioDeleteView, UsuarioListView, UsuarioUpdateView, TutorListView, TutorCreateView, TutorDetailView, TutorUpdateView, TutorDeleteView, AsignaturaForm, AsignaturaListView, AsignaturaCreateView, AsignaturaDetailView, AsignaturaUpdateView, AsignaturaDeleteView, MatriculaListView, MatriculaCreateView, MatriculaDetailView, MatriculaUpdateView, MatriculaDeleteView, ReportesListView, ReportesCreateView, ReportesDetailView, ReportesUpdateView, ReportesDeleteView, ExpedienteMedicoListView, ExpedienteMedicoCreateView, ExpedienteMedicoDetailView, ExpedienteMedicoUpdateView, ExpedienteMedicoDeleteView, load_municipios, login_view, HorariosCreateView, HorariosDeleteView, HorariosListView, HorariosUpdateView, NivelesCreateView, NivelesListView, NivelesDeleteView, NivelesUpdateView, ParcialesListView, ParcialesCreateView, ParcialesDeleteView, ParcialesUpdateView, NotasCreateView, NotasDeleteView, NotasListView, NotasUpdateView, DepaCreateView,DepaDeleteView, DepaUpdateView,DepaListView, MuniCreateView, MuniDeleteView, MuniListView, MuniUpdateView, PagosCreateView, PagosDeleteView, PagosUpdateView, PagosListView, PagosDetailView, MensualidadCreateView, MensualidadDeleteView, MensualidadListView, MensualidadUpdateView, ParametrosCreateView, ParametrosDeleteView,ParametrosDetailView, ParametrosUpdateView, ParametrosListView, DocCreateView, DocDeleteView, DocUpdateView, DocListView, CateCreateView, CateDeleteView, CateListView, CateUpdateView
 
 urlpatterns = [
     path('', login_view, name='login'),
@@ -109,9 +109,49 @@ urlpatterns = [
     path('usuarios/agregar/', UsuarioCreateView.as_view(), name='usuario_crear'),
     path('usuarios/<int:pk>/editar/', UsuarioUpdateView.as_view(), name='usuario_editar'),
     path('usuarios/<int:pk>/eliminar/', UsuarioDeleteView.as_view(), name='usuario_eliminar'),
+
+    path('departamentos/', DepaListView.as_view(), name='departamento_listar'),
+    path('departamentos/crear/', DepaCreateView.as_view(), name='departamento_crear'),
+    path('departamentos/editar/<int:pk>/', DepaUpdateView.as_view(), name='departamento_editar'),
+    path('departamentos/eliminar/<int:pk>/', DepaDeleteView.as_view(), name='departamento_eliminar'),
+
+    path('municipios/', MuniListView.as_view(), name='municipio_listar'),
+    path('municipios/crear/', MuniCreateView.as_view(), name='municipio_crear'),
+    path('municipios/editar/<int:pk>/', MuniUpdateView.as_view(), name='municipio_editar'),
+    path('municipios/eliminar/<int:pk>/', MuniDeleteView.as_view(), name='municipio_eliminar'),
+
+    path('pagos/', PagosListView.as_view(), name='pago_listar'),
+    path('pagos/<int:pk>/ver/', PagosDetailView.as_view(), name='pago_detalle'),
+    path('pagos/agregar/', PagosCreateView.as_view(), name='pago_crear'),
+    path('pagos/<int:pk>/editar/', PagosUpdateView.as_view(), name='pago_editar'),
+    path('pagos/<int:pk>/eliminar/', PagosDeleteView.as_view(), name='pago_eliminar'),
+
+    path('meses/', MensualidadListView.as_view(), name='mensualidad_listar'),
+    path('meses/crear/', MensualidadCreateView.as_view(), name='mensualidad_crear'),
+    path('meses/editar/<int:pk>/', MensualidadUpdateView.as_view(), name='mensualidad_editar'),
+    path('meses/eliminar/<int:pk>/', MensualidadDeleteView.as_view(), name='mensualidad_eliminar'),
+
+    path('parametrossar/', ParametrosListView.as_view(), name='parametros_listar'),
+    path('parametrossar/<int:pk>/ver/', ParametrosDetailView.as_view(), name='parametros_detalle'),
+    path('parametrossar/agregar/', ParametrosCreateView.as_view(), name='parametros_crear'),
+    path('parametrossar/<int:pk>/editar/', ParametrosUpdateView.as_view(), name='parametros_editar'),
+    path('parametrossar/<int:pk>/eliminar/', ParametrosDeleteView.as_view(), name='parametros_eliminar'),
+
+    path('categorias/', CateListView.as_view(), name='categoria_listar'),
+    path('categorias/crear/', CateCreateView.as_view(), name='categoria_crear'),
+    path('categorias/editar/<int:pk>/', CateUpdateView.as_view(), name='categoria_editar'),
+    path('categorias/eliminar/<int:pk>/', CateDeleteView.as_view(), name='categoria_eliminar'),
+
+    path('documentos/', DocListView.as_view(), name='documento_listar'),
+    path('documentos/crear/', DocCreateView.as_view(), name='documento_crear'),
+    path('documentos/editar/<int:pk>/', DocUpdateView.as_view(), name='documento_editar'),
+    path('documentos/eliminar/<int:pk>/', DocDeleteView.as_view(), name='documento_eliminar'),
+
+
+    
     
 #municipios y departamentos
- path('ajax/load-municipios/', load_municipios, name='ajax_load_municipios'),  
+    path('ajax/load-municipios/', load_municipios, name='ajax_load_municipios'),  
  
 
  #grados
@@ -125,7 +165,7 @@ urlpatterns = [
 
 #expedientes
 
-path('expedienteescolares/', ExpedienteEscolarListView.as_view(), name='expedienteescolar_listar'),
+    path('expedienteescolares/', ExpedienteEscolarListView.as_view(), name='expedienteescolar_listar'),
     path('expedienteescolares/crear/', ExpedienteEscolarCreateView.as_view(), name='expedienteescolar_crear'),
     path('expedienteescolares/<int:pk>/ver/', ExpedienteEscolarDetailView.as_view(), name='expedienteescolar_detalle'),
     path('expedienteescolares/<int:pk>/editar/', ExpedienteEscolarUpdateView.as_view(), name='expedienteescolar_editar'),

@@ -310,270 +310,80 @@
 <!-- End of Topbar -->
 {% endblock barra_arriba %}
 {% block pagina_contenido %}
-   <a href="{% url 'niveles_crear' %}">
-   <div class=" background-color: #6610F2">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style=" width: -100PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Niveles educativos</h6>
-    </button>
-    </a>
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Listado de Pagos</h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">ACCIONES:</div>
+                    <a class="dropdown-item" href="{% url 'pago_crear' %}">Nuevo pago</a>
+                    <a class="dropdown-item" href="{%  url 'bienvenida_administrador' %}">Principal</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            {% if not pago %}
+          {% endif %}
+          <table id="pago" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tutor</th>
+                        <th>Alumno</th>
+                        <th>Fecha de pago</th>
+                        <th>Tipo de pago</th>
+                        <th>Mes</th>
+                        <th>Hora de pagp</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pago in pagos  %}
+                    <tr>
+                        <td>{{ pago.idPago}}</td>
+                        <td>{{ pago.Tutor}}</td>
+                        <td>{{ pago.Alumno}}</td>
+                        <td>{{ pago.FechaPago}}</td>
+                        <td>{{ pago.TipoPago}}</td>
+                        <td>{{ pago.Meses}}</td>
+                        <td>{{ pago.HoraPago}}</td>
+                        <th>
+                           </a>
+                            <a href="{% url 'pago_editar' pago.idPago %}"class="btn btn-link text-success">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'pago_eliminar' pago.idPago %}"class="btn btn-link text-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No hay pagos registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+         </table>
+            
+            {% endblock pagina_contenido %}
 
-    <a href="{% url 'tutor_crear' %}">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -100PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Tutores</h6>
-    </button>
-    </a>
+            {% block js_pages %}
 
-    <a href="{% url 'alumno_crear' %}">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -100PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Alumnos</h6>
-    </button>
-    </a>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $('#pagos').DataTable();
+            });
+            </script>
 
-    <a>
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -200PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Expedientes escolares</h6>
-    </button>
-    </a>
+{% endblock js_pages %}
 
-    <a href="{% url 'expedientemedico_crear' %}">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -200PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Expedientes Medicos</h6>
-    </button>
-    </a>
-
-    <a href="{% url 'reporte_crear' %}">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -100PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Reportes</h6>
-    </button>
-    </a>
-
-    <a href="{% url 'horarios_crear' %}">
-    <button class="card-header py-3  flex-row align-items-center justify-content-between bg-white"style="width: -100PX;">
-        <h6 class="m-0 font-weight-bold text-primary">Horarios</h6>
-        <a class="dropdown-item mr-4" ></a>
-    </button>
-    </a>
-    <hr></hr>
-    
-    
-   </div>
-
-   <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Matriculas</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'matricula_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Matricula nueva
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'matricula_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Matriculas
-            </a>
-        </div>
     </div>
- </div>
-   
- 
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Catedráticos</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'crear_catedratico' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevo
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'listar_catedraticos' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Catedráticos
-            </a>
-        </div>
-    </div>
- </div>
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Empleados</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'crear_empleado' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevo
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'listar_empleados' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Empleados
-            </a>
-        </div>
-    </div>
- </div>
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Asignaturas</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'asignatura_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevo
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'asignatura_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Asignaturas
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Departamentos</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'departamento_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'departamento_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Municipios</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'municipio_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'municipio_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Pagos</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'pago_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'pago_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Meses</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'mensualidad_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'mensualidad_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Parametros SAR</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'parametros_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'parametros_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Documentos de identificacion personal</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'documento_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'documento_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div> 
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Categorias de empleado</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'categoria_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'categoria_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar 
-            </a>
-        </div>
-    </div>
- </div>   
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Grados y secciones</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'grado_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar nuevos
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'grado_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar grados-seccion
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary"> Notas</h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'notas_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar Notas
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'notas_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Notas
-            </a>
-        </div>
-    </div>
- </div>  
- <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary"> Parciales </h6>
-        <div class="dropdown no-arrow justify-content-end">
-            <a class="dropdown-item mr-4" href="{% url 'parciales_crear' %}">
-                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
-                Agregar Parcial
-            </a>
-            <a class="dropdown-item mr-4" href="{% url 'parciales_listar' %}">
-                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
-                Listar Parciales
-            </a>
-        </div>
-    </div>
- </div> 
-          
-</body>
-    
-        
-
-{% endblock pagina_contenido %}
-</html>
+</div>

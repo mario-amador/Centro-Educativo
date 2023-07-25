@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView,TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos
-from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm
+from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
+from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -621,3 +621,159 @@ class ExpedienteEscolarDeleteView(DeleteView):
     model = ExpedienteEscolar
     template_name = 'ExpedienteEscolar/expedienteescolar_eliminar.html'
     success_url = reverse_lazy('expedienteescolar_listar')
+
+
+class DepaListView(ListView):
+    model = Departamento
+    template_name = 'Departamento/departamento_listar.html'
+    context_object_name = 'departamentos'
+    
+class DepaCreateView(CreateView):
+    model = Departamento
+    form_class = DepartamentoForm
+    template_name = 'Departamento/departamento_crear.html'
+    success_url = reverse_lazy('departamento_listar')
+class DepaUpdateView(UpdateView):
+    model = Departamento
+    form_class = DepartamentoForm
+    template_name = 'Departamento/departamento_editar.html'
+    success_url = reverse_lazy('departamento_listar')
+
+class DepaDeleteView(DeleteView):
+    model = Departamento
+    template_name = 'Departamento/departamento_eliminar.html'
+    success_url = reverse_lazy('departamento_listar')
+
+class MuniListView(ListView):
+    model = Municipio
+    template_name = 'Municipios/municipio_listar.html'
+    context_object_name = 'municipios'
+    
+class MuniCreateView(CreateView):
+    model = Municipio
+    form_class = MunicipioForm
+    template_name = 'Municipios/municipio_crear.html'
+    success_url = reverse_lazy('municipio_listar')
+class MuniUpdateView(UpdateView):
+    model = Municipio
+    form_class = MunicipioForm
+    template_name = 'Municipios/municipio_editar.html'
+    success_url = reverse_lazy('municipio_listar')
+class MuniDeleteView(DeleteView):
+    model = Municipio
+    template_name = 'Municipios/municipio_eliminar.html'
+    success_url = reverse_lazy('municipio_listar')
+
+class PagosListView(ListView):
+    model = Pagos
+    template_name = 'Pagos/pago_listar.html'
+    context_object_name = 'pagos'
+
+class PagosCreateView(CreateView):
+    model = Pagos
+    form_class = PagosForm
+    template_name = 'Pagos/pago_crear.html'
+    success_url = reverse_lazy('pago_listar')
+
+class PagosDetailView(DetailView):
+    model = Pagos
+    template_name = 'Pagos/pago_detalle.html'
+
+class PagosUpdateView(UpdateView):
+    model = Pagos
+    form_class = PagosForm
+    template_name = 'Pagos/pago_editar.html'
+    success_url = reverse_lazy('pago_listar')
+
+class PagosDeleteView(DeleteView):
+    model = Pagos
+    template_name = 'Pagos/pago_eliminar.html'
+    success_url = reverse_lazy('pago_listar')
+
+
+class MensualidadListView(ListView):
+    model = Meses
+    template_name = 'Meses/mensualidad_listar.html'
+    context_object_name = 'mensualidades'  
+class MensualidadCreateView(CreateView):
+    model = Meses
+    form_class = MensualidadForm
+    template_name = 'Meses/mensualidad_crear.html'
+    success_url = reverse_lazy('mensualidad_listar')
+class MensualidadUpdateView(UpdateView):
+    model = Meses
+    form_class = MensualidadForm
+    template_name = 'Meses/mensualidad_editar.html'
+    success_url = reverse_lazy('mensualidad_listar')
+class MensualidadDeleteView(DeleteView):
+    model = Meses
+    template_name = 'Meses/mensualidad_eliminar.html'
+    success_url = reverse_lazy('mensualidad_listar')
+
+
+class ParametrosListView(ListView):
+    model = ParametrosSAR
+    template_name = 'Parametros/parametros_listar.html'
+    context_object_name = 'parametros'
+
+class ParametrosCreateView(CreateView):
+    model = ParametrosSAR
+    form_class = ParametrosSARForm
+    template_name = 'Parametros/parametros_crear.html'
+    success_url = reverse_lazy('parametros_listar')
+
+class ParametrosDetailView(DetailView):
+    model = ParametrosSAR
+    template_name = 'Parametros/parametros_detalle.html'
+
+class ParametrosUpdateView(UpdateView):
+    model = ParametrosSAR
+    form_class = ParametrosSARForm
+    template_name = 'Parametros/parametros_editar.html'
+    success_url = reverse_lazy('parametros_listar')
+
+class ParametrosDeleteView(DeleteView):
+    model = ParametrosSAR
+    template_name = 'Parametros/parametros_eliminar.html'
+    success_url = reverse_lazy('parametros_listar')
+
+#Views Categoria de empleados
+class CateListView(ListView):
+    model = CategoriaEmpleado
+    template_name = 'Categorias/categoria_listar.html'
+    context_object_name = 'categorias'  
+class CateCreateView(CreateView):
+    model = CategoriaEmpleado
+    form_class = CategoriaForm
+    template_name = 'Categorias/categoria_crear.html'
+    success_url = reverse_lazy('categoria_listar')
+class CateUpdateView(UpdateView):
+    model = CategoriaEmpleado
+    form_class = CategoriaForm
+    template_name = 'Categorias/categoria_editar.html'
+    success_url = reverse_lazy('categoria_listar')
+class CateDeleteView(DeleteView):
+    model = CategoriaEmpleado
+    template_name = 'Categorias/categoria_eliminar.html'
+    success_url = reverse_lazy('categoria_listar')
+
+#Views documentos
+
+class DocListView(ListView):
+    model = DocumentoDPI
+    template_name = 'Documentos/documento_listar.html'
+    context_object_name = 'documentos'  
+class DocCreateView(CreateView):
+    model = DocumentoDPI
+    form_class = DocumentoForm
+    template_name = 'Documentos/documento_crear.html'
+    success_url = reverse_lazy('documento_listar')
+class DocUpdateView(UpdateView):
+    model = DocumentoDPI
+    form_class = DocumentoForm
+    template_name = 'Documentos/documento_editar.html'
+    success_url = reverse_lazy('documento_listar')
+class DocDeleteView(DeleteView):
+    model = DocumentoDPI
+    template_name = 'Documentos/documento_eliminar.html'
+    success_url = reverse_lazy('documento_listar')

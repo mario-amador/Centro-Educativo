@@ -1,8 +1,7 @@
 import re
 from django import forms
 from django.forms import Select, DateInput
-from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos
-
+from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
 class AlumnoForm(forms.ModelForm):
 
     class Meta:
@@ -664,4 +663,131 @@ class ExpedienteEscolarForm(forms.ModelForm):
             'PromedioAnualAnterior': forms.IntegerField(),
             'Tutor': forms.Select(
                 attrs={'class': 'form-control'}),
+        }
+class DepartamentoForm(forms.ModelForm):
+    class Meta:
+        model = Departamento
+        fields = ['Departamento']
+        labels = {
+            'Departamento': 'Departamento',
+        }
+        widgets = {
+            'Departamento': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
+        }
+
+
+class MunicipioForm(forms.ModelForm):
+    class Meta:
+        model = Municipio
+        fields = ['nombreMunicipio', 'Departamento']
+        labels = {
+            'nombeMunicipio': 'Municipio',
+            'Departamento': 'Departamento',
+        }
+        widgets = {
+            'nombreMunicipio': forms.TextInput(
+                attrs={'class': 'form-control',
+                       'pattern':'[a-zA-Z].{4,20}',}),
+            'Departamento': forms.Select(
+                attrs={'class': 'form-control'}),
+        }
+
+
+class PagosForm(forms.ModelForm):
+    class Meta:
+        model = Pagos
+        fields = ['Tutor', 'Alumno', 'FechaPago','TipoPago', 'Meses', 'HoraPago']
+        labels = {
+            'Tutor': 'Tutor',
+            'Alumno': 'Alumno',
+            'FechaPago': 'Fecha de pago',
+            'TipoPago': 'Tipo de pago, precio',
+            'Meses': 'Mes a pagar',
+            'HoraPago': 'Hora de pago',
+        }
+        widgets = {
+            'Tutor': forms.Select(
+                attrs={'class': 'form-control'}),
+            'Alumno': forms.Select(
+                attrs={'class': 'form-control'}),
+            'FechaPago': forms.DateInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'YYYY-MM-DD', 
+                       'type': 'date'}),
+            'TipoPago': forms.Select(
+                attrs={'class': 'form-control'}),
+            'Meses': forms.Select(
+                attrs={'class': 'form-control'}),
+            'HoraPago': forms.TimeInput(
+                attrs={'class': 'form-control'}),
+        }
+class MensualidadForm(forms.ModelForm):
+    class Meta:
+        model = Meses
+        fields = ['Meses']
+        labels = {
+            'Meses': 'Mes.',
+        }
+        widgets = {
+            'Meses': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
+        }
+class ParametrosSARForm(forms.ModelForm):
+    class Meta:
+        model = ParametrosSAR
+        fields = ['CAI', 'RTN', 'RangoInicial', 'RangoFinal', 'FechaEmision', 'FechaVencimiento', 'Correlativo']
+        labels = {
+            'CAI': 'CAI:',
+            'RTN': 'RTN:',
+            'RangoInicial': 'Rango Inicial:',
+            'RangoFinal': 'Rango Final:',
+            'FechaEmision': 'Fecha de emision:',
+            'FechaVencimiento': 'Fecha de vencimiento',
+            'Correlativo': 'Correlativo'
+        }
+        widgets = {
+            'CAI': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'RTN': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'RangoInicial': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'RangoFinal': forms.TextInput(),
+            'FechaEmision': forms.DateInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'YYYY-MM-DD', 
+                       'type': 'date'}),
+            'FechaVencimiento': forms.DateInput(
+                attrs={'class': 'form-control',
+                       'placeholder': 'YYYY-MM-DD', 
+                       'type': 'date'}),
+            'Correlativo': forms.DateInput(
+                attrs={'class': 'form-control'}),
+        }
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = CategoriaEmpleado
+        fields = ['CategoriaEmpleado']
+        labels = {
+            'CategoriaEmpleado': 'Categoria de empleado',
+        }
+        widgets = {
+            'CategoriaEmpleado': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
+        }
+class DocumentoForm(forms.ModelForm):
+    class Meta:
+        model = DocumentoDPI
+        fields = ['DocumentoDPI']
+        labels = {
+            'DocumentoDPI': 'Documento de identificacion personal:',
+        }
+        widgets = {
+            'DocumentoDPI': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
         }
