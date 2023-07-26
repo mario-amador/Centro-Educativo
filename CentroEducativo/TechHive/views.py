@@ -7,6 +7,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
 from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm, TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm, UserCreationForm, UserEditForm
+
+from .models import TipoReporte, TipoSanguineo, Alumno,Empleado,Catedratico,TipoPago, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
+from .forms import TipoReporteForm,TipoSanguineoForm, AlumnoForm,EmpleadoForm,CatedraticoForm, TipoPagoForm,ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -797,3 +800,75 @@ class DocDeleteView(DeleteView):
     model = DocumentoDPI
     template_name = 'Documentos/documento_eliminar.html'
     success_url = reverse_lazy('documento_listar')
+
+#Views TiposPagos
+
+class TipoPagoListView(ListView):
+    model = TipoPago
+    template_name = 'TipoPago/tipopago_listar.html'
+    context_object_name = 'tipospago'
+
+class TipoPagoCreateView(CreateView):
+    model = TipoPago
+    form_class = TipoPagoForm
+    template_name = 'TipoPago/tipopago_crear.html'
+    success_url = reverse_lazy('tipopago_listar')
+
+class TipoPagoUpdateView(UpdateView):
+    model = TipoPago
+    form_class = TipoPagoForm
+    template_name = 'TipoPago/tipopago_editar.html'
+    success_url = reverse_lazy('tipopago_listar')
+
+class TipoPagoDeleteView(DeleteView):
+    model = TipoPago
+    template_name = 'TipoPago/tipopago_eliminar.html'
+    success_url = reverse_lazy('tipopago_listar')
+
+#Views TiposReportes
+
+class TipoReporteListView(ListView):
+    model = TipoReporte
+    template_name = 'TipoReporte/tiporeporte_listar.html'
+    context_object_name = 'tiposreportes'
+
+class TipoReporteCreateView(CreateView):
+    model = TipoReporte
+    form_class = TipoReporteForm
+    template_name = 'TipoReporte/tiporeporte_crear.html'
+    success_url = reverse_lazy('tiporeporte_listar')
+
+class TipoReporteUpdateView(UpdateView):
+    model = TipoReporte
+    form_class = TipoReporteForm
+    template_name = 'TipoReporte/tiporeporte_editar.html'
+    success_url = reverse_lazy('tiporeporte_listar')
+
+class TipoReporteDeleteView(DeleteView):
+    model = TipoReporte
+    template_name = 'TipoReporte/tiporeporte_eliminar.html'
+    success_url = reverse_lazy('tiporeporte_listar')
+
+#Views TiposReportes
+
+class TipoSanguineoListView(ListView):
+    model = TipoSanguineo
+    template_name = 'TipoSanguineo/tiposanguineo_listar.html'
+    context_object_name = 'tiposanguineos'
+
+class TipoSanguineoCreateView(CreateView):
+    model = TipoSanguineo
+    form_class = TipoSanguineoForm
+    template_name = 'TipoSanguineo/tiposanguineo_crear.html'
+    success_url = reverse_lazy('tiposanguineo_listar')
+
+class TipoSanguineoUpdateView(UpdateView):
+    model = TipoSanguineo
+    form_class = TipoSanguineoForm
+    template_name = 'TipoSanguineo/tiposanguineo_editar.html'
+    success_url = reverse_lazy('tiposanguineo_listar')
+
+class TipoSanguineoDeleteView(DeleteView):
+    model = TipoSanguineo
+    template_name = 'TipoSanguineo/tiposanguineo_eliminar.html'
+    success_url = reverse_lazy('tiposanguineo_listar')

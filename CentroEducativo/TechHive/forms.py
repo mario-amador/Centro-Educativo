@@ -118,6 +118,8 @@ def no_tres_letras_iguales_validator(value):
 
     
 
+
+from .models import Alumno,Empleado,Catedratico,TipoSanguineo,TipoReporte,TipoPago, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
 class AlumnoForm(forms.ModelForm):
 
     class Meta:
@@ -1063,6 +1065,47 @@ class DocumentoForm(forms.ModelForm):
         }
         widgets = {
             'DocumentoDPI': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
+        }
+
+class TipoPagoForm(forms.ModelForm):
+    class Meta:
+        model=TipoPago
+        fields=['TipoPago', 'PrecioPago']
+        labels={'TipoPago':'Nombre del pago',
+                'PrecioPago':'Precio del pago'}
+        widgets={
+            'TipoPago': forms.TextInput(
+                 attrs={'class': 'form-control',
+                        'pattern':'[a-zA-Z].{4,20}',}),
+            'PrecioPago': forms.NumberInput(
+                 attrs={'class': 'form-control',
+                        'step':'.1'}),
+
+            }
+        
+class TipoSanguineoForm(forms.ModelForm):
+    class Meta:
+        model = TipoSanguineo
+        fields = ['TipoSanguineo']
+        labels = {
+            'TipoSanguineo': 'Tipo Sanguineo',
+        }
+        widgets = {
+            'TipoSanguineo': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            
+        }
+class TipoReporteForm(forms.ModelForm):
+    class Meta:
+        model = TipoReporte
+        fields = ['TipoReporte']
+        labels = {
+            'TipoReporte': 'Tipo de reporte',
+        }
+        widgets = {
+            'TipoReporte': forms.TextInput(
                 attrs={'class': 'form-control'}),
             
         }
