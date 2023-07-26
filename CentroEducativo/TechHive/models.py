@@ -247,6 +247,7 @@ class Facturacion(models.Model):
     def __str__(self):
         return f"{self.CentroEducativo} {self.ParametrosSAR} {self.NumeroFactura} {self.Pagos} {self.ImporteExonerado} {self.ImporteExcento} {self.ImporteGravado15} {self.ImporteGravado18} {self.ImpuestoSobreVenta15} {self.ImpuestoSobreVenta18} {self.Total}"
     
+    
 class Reportes(models.Model):
     TipoReporte = models.ForeignKey(TipoReporte, on_delete=models.CASCADE)
     Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
