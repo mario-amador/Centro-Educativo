@@ -6,7 +6,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
-from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm
+from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm, TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm, UserCreationForm, UserEditForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -49,6 +49,18 @@ from django.contrib import messages
 from django.contrib.auth import login
 from .models import Usuario
 
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import LoginForm
+
+from django.contrib.auth import authenticate
+
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Usuario
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -61,29 +73,39 @@ def login_view(request):
 
         if user is not None and user.password == password:
             # Las credenciales son correctas
-            if user.intentos_fallidos >= 3:
-                # El usuario ha excedido el número máximo de intentos fallidos
-                # Puedes bloquear al usuario aquí o aplicar alguna lógica adicional de seguridad
-                messages.error(request, 'Ha excedido el número máximo de intentos fallidos. Por favor, contacte al administrador.')
-                return redirect('login')  # Redirigir al formulario de inicio de sesión
-            
-            # Restablecer el número de intentos fallidos a 0
-            user.intentos_fallidos = 0
-            user.save()
-            
-            login(request, user)
-            if user.rol.nombre == "Administrador":
-                messages.success(request, f'Bienvenido, {user.username} (Administrador)')
-                return redirect('bienvenida_administrador')
-            elif user.rol.nombre == "Alumno":
-                messages.success(request, f'Bienvenido, {user.username} (Alumno)')
-                return redirect('bienvenida_alumno')
-            elif user.rol.nombre == "Catedrático":
-                messages.success(request, f'Bienvenido, {user.username} (Catedrático)')
-                return redirect('bienvenida_catedratico')
+            if user.activo:
+                if user.intentos_fallidos >= 3:
+                    # El usuario ha excedido el número máximo de intentos fallidos y se bloqueará
+                    # Puedes bloquear al usuario aquí o aplicar alguna lógica adicional de seguridad
+
+                    # Bloquear al usuario
+                    user.activo = False
+                    user.save()
+
+                    messages.error(request, 'Ha excedido el número máximo de intentos fallidos. Su cuenta ha sido bloqueada. Por favor, contacte al administrador.')
+                    return redirect('login')  # Redirigir al formulario de inicio de sesión
+                else:
+                    # Restablecer el número de intentos fallidos a 0 si aún no ha alcanzado el límite
+                    user.intentos_fallidos = 0
+                    user.save()
+
+                login(request, user)
+                if user.rol.nombre == "Administrador":
+                    messages.success(request, f'Bienvenido, {user.username} (Administrador)')
+                    return redirect('bienvenida_administrador')
+                elif user.rol.nombre == "Alumno":
+                    messages.success(request, f'Bienvenido, {user.username} (Alumno)')
+                    return redirect('bienvenida_alumno')
+                elif user.rol.nombre == "Catedrático":
+                    messages.success(request, f'Bienvenido, {user.username} (Catedrático)')
+                    return redirect('bienvenida_catedratico')
+                else:
+                    messages.error(request, 'Rol de usuario no válido')
+                    return redirect('login')  # Redirigir al formulario de inicio de sesión si el rol no es válido
             else:
-                messages.error(request, 'Rol de usuario no válido')
-                return redirect('login')  # Redirigir al formulario de inicio de sesión si el rol no es válido
+                # La cuenta del usuario está bloqueada
+                messages.error(request, 'Su cuenta está bloqueada. Por favor, contacte al administrador.')
+                return redirect('login')  # Redirigir al formulario de inicio de sesión si la cuenta está bloqueada
         else:
             # Las credenciales son incorrectas
             if user is not None:
@@ -95,7 +117,6 @@ def login_view(request):
             return redirect('login')  # Redirigir al formulario de inicio de sesión si las credenciales son incorrectas
     
     return render(request, 'base/login.html')
-
 
 
 
@@ -154,7 +175,6 @@ class InicioPantalla(LoginRequiredMixin, TemplateView):
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .forms import UserForm
 from .models import Usuario
 
 #usuarios
@@ -172,13 +192,13 @@ class UsuarioListView(ListView):
 
 class UsuarioCreateView(CreateView):
     model = Usuario
-    form_class = UserForm
+    form_class = UserCreationForm
     template_name = 'Usuario/usuario_crear.html'
     success_url = reverse_lazy('usuario_listar')
 
 class UsuarioUpdateView(UpdateView):
     model = Usuario
-    form_class = UserForm
+    form_class = UserEditForm
     template_name = 'Usuario/usuario_editar.html'
     success_url = reverse_lazy('usuario_listar')
 
@@ -249,7 +269,7 @@ class EmpleadoDetailView(DetailView):
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
     form_class = EmpleadoForm
-    template_name = 'Empleado/editar.html'
+    template_name = 'Empleado/empleado_editar.html'
     success_url = reverse_lazy('listar_empleados')
 
 class EmpleadoDeleteView(DeleteView):

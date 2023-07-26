@@ -332,29 +332,50 @@
     <!-- Card Body -->
     <div class="card-body">
 <div class="card-body">
-<html>
-  <head>
-    <title>Agregar departamento</title>
-  </head>
-  <body>
-    {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" value="submit" class="btn btn-success">
-        <i class="fas fa-save"></i> Guardar</button>
-      <a href="{% url 'asignatura_listar' %}" class="btn btn-secondary">
-        <i class="fas fa-times"></i> Cancelar</a>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
-        
-  </body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Agregar departamento</title>
+      <!-- Agrega aquí tus enlaces a hojas de estilos CSS si los tienes -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    </head>
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form method="post">
+              {% csrf_token %}
+              {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                  <strong>Error de validación:</strong>
+                  <ul>
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                      {% endfor %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              {% for field in form %}
+                <div class="form-group">
+                  <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                  {{ field }}
+                </div>
+              {% endfor %}
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Guardar
+              </button>
+              <a href="{% url 'departamento_listar' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Agrega aquí tus enlaces a scripts JS si los tienes -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    </body>
 </div>
 </div>
 {% endblock pagina_contenido %}

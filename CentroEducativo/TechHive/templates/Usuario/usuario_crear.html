@@ -330,67 +330,57 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        
-          <form method="post">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type="submit" value="submit"  class="btn btn-success">
-        <i class="fas fa-save"></i> Guardar</button> 
-      <a href="{% url 'usuario_listar' %}" class="btn btn-secondary">
-        <i class="fas fa-times"></i> Cancelar</a>
-          </form>
+        <div class="card-body">
+            <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Actualizar usuario</title>
+            <!-- Agrega aquí tus enlaces a hojas de estilos CSS si los tienes -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+          </head>
+          <body>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 offset-md-3">
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error de validación:</strong>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                    {% if field.name == 'password' %}
+                        {{ field }}
+                        <small class="form-text text-muted">
+                            La contraseña debe tener al menos 8 caracteres y contener al menos un número, una letra mayúscula y una letra minúscula.
+                        </small>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <a href="{% url 'usuario_listar' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </form>
           <!-- En el head de tu plantilla -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
-
-<!-- Al final del body de tu plantilla -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
-
-<script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        var password = document.getElementById('id_password').value;
-        var confirm_password = document.getElementById('id_confirm_password').value;
-
-        var errors = [];
-
-        if (password.trim() === '') {
-            errors.push('La contraseña es requerida.');
-        }
-
-        if (confirm_password.trim() === '') {
-            errors.push('La confirmación de contraseña es requerida.');
-        }
-
-        if (password !== confirm_password) {
-            errors.push('Las contraseñas no coinciden.');
-        }
-
-        if (errors.length > 0) {
-            event.preventDefault();
-
-            var errorMessages = errors.join('\n');
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de validación',
-                text: errorMessages,
-            });
-        } else {
-            // Simulando el guardado exitoso del formulario
-            // Aquí puedes agregar tu lógica para guardar el formulario en el backend
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'El formulario se ha guardado correctamente.',
-            });
-        }
-    });
-</script>
-      
-          <script type="text/javascript">
-              $(document).ready(function() {
-                  $('#usuario').DataTable();
-              });
-          </script>
-      {% endblock pagina_contenido %}
-      
+ <!-- Agrega aquí tus enlaces a scripts JS si los tienes -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+</body>
+    </div>
+    </div>
+    {% endblock pagina_contenido %}
+    </html>
