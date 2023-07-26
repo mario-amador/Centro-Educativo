@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% block barra_arriba %}
+{% endblock barra_arriba %}
+{% block pagina_contenido %}
+ <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalles del Grado</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+<div class="card-body">
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><span class=> Numero de Factura: </span> <br> {{factura.NumeroFactura}}</p>
+      <p><span class=> Fecha: </span> <br> {{factura.Fecha}}</p>
+      <p><span class=> ParametrosSAR: </span> <br> {{factura.ParametrosSAR}}</p>
+      <p><span class=> Centro Educativo: </span> <br> {{factura.CentroEducativo}}</p>
+      <p><span class=> Pagos: </span> <br> {{factura.Pagos}}</p>
+      <p><span class=> ImporteExonerado: </span> <br> {{factura.ImporteExonerado}}</p>
+      <p><span class=> ImporteExcento: </span> <br> {{factura.ImporteExcento}}</p>
+      <p><span class=> ImporteGravado15: </span> <br> {{factura.ImporteGravado15}}</p>
+      <p><span class=> ImporteGravado18: </span> <br> {{factura.ImporteGravado18}}</p>
+      <p><span class=> ImpuestoSobreVenta15: </span> <br> {{factura.ImpuestoSobreVenta18}}</p>
+      <p><span class=> ImpuestoSobreVenta18: </span> <br> {{factura.ImporteGravado15}}</p>
+      <p><span class=> Total: </span> <br> {{factura.Total}}</p>
+ 
+    <a href="{%  url 'facturacion_listar' %}" type="submit" class="btn btn-primary">
+    <i class="fas fa-reply"></i> Volver</a>
+    </form>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>
+
+    

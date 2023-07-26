@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+
+<div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        <h1>¿Estás seguro de que deseas eliminar La Factura?</h1>
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="Id" value="{{ factura.id }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="numerofactura">Numero Factura:</label>
+            <input type="text" id="numerofactura" name="Numero Factura" value="{{ factura.NumeroFactura }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="Fecha" value="{{ factura.Fecha }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="parametrosar">Parametro SAR:</label>
+            <input type="text" id="parametrosar" name="Parametro SAR" value="{{ factura.ParametrosSAR }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="centroeducativo">Centro Educativo:</label>
+            <input type="text" id="centroeducativo" name="Centro Educativo" value="{{ factura.CentroEducativo }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="pagos">Pagos:</label>
+            <input type="text" id="pagos" name="Pagos" value="{{ factura.Pagos }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="importeexonerado">Importe Exonerado:</label>
+            <input type="text" id="importeexonerado" name="Importe Exonerado" value="{{ factura.ImporteExonerado }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="importeexcento">Importe Excento:</label>
+            <input type="text" id="importeexcento" name="Importe Excento" value="{{ factura.ImporteExcento }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="importegravado15">Importe Gravado15:</label>
+            <input type="text" id="importegravado15" name="ImporteGravado15" value="{{ factura.ImporteGravado15 }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="importegravado18">Importe Gravado18:</label>
+            <input type="text" id="importegravado18" name="Importe Gravado18" value="{{ factura.ImporteGravado18 }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="impuestosobreventa18">Impuesto Sobre Venta18:</label>
+            <input type="text" id="fecha" name="Impuesto Sobre Venta18" value="{{ factura.ImpuestoSobreVenta18 }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="impuestosobreventa15">ImpuestoSobreVenta15:</label>
+            <input type="text" id="impuestosobreventa15" name="ImpuestoSobreVenta15" value="{{ factura.ImpuestoSobreVenta15 }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="total">Total:</label>
+            <input type="text" id="total" name="Total" value="{{ factura.Total }}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url facturacion_listar' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+
+    <script>
+        function mensaje() {
+            alert("¿Seguro que desea eliminar?");
+        }
+    </script>
+</div>
+{% endblock pagina_contenido %}

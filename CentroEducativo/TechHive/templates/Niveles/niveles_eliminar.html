@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block pagina_contenido %}
+<div class="card-body">
+    <h1>¿Estás seguro de que deseas eliminar el nivel educativo ?"</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="Id" value="{{ niveleducativo.id }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="nivel">Nivel Educativo:</label>
+            <input type="text" id="nivel" name="NivelEducativo" value="{{ niveleducativo.NivelEducativo }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="horario">Horario:</label>
+            <input type="text" id="horario" name="Horario" value="{{ niveleducativo.Horario }}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'niveles_listar' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function mensaje() {
+        alert("¿Seguro que desea eliminar?");
+    }
+</script>
+{% endblock %}

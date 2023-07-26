@@ -5,11 +5,11 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView,TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
-from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm, TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm, UserCreationForm, UserEditForm
+from .models import Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI, Facturacion
+from .forms import AlumnoForm,EmpleadoForm,CatedraticoForm, ExpedienteEscolarForm, GradoForm, TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm, UserCreationForm, UserEditForm, FacturacionForm
 
-from .models import TipoReporte, TipoSanguineo, Alumno,Empleado,Catedratico,TipoPago, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
-from .forms import TipoReporteForm,TipoSanguineoForm, AlumnoForm,EmpleadoForm,CatedraticoForm, TipoPagoForm,ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm
+from .models import TipoReporte, TipoSanguineo, Alumno,Empleado,Catedratico,TipoPago, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, Pagos, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI, Facturacion
+from .forms import TipoReporteForm,TipoSanguineoForm, AlumnoForm,EmpleadoForm,CatedraticoForm, TipoPagoForm,ExpedienteEscolarForm, GradoForm,TutorForm,AsignaturaForm,MatriculaForm,ReportesForm,ExpedienteMedicoForm, HorariosForm, NivelesForm, ParcialesForm, NotasForm, DepartamentoForm, MunicipioForm, PagosForm, MensualidadForm, ParametrosSARForm, CategoriaForm, DocumentoForm, FacturacionForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -872,3 +872,36 @@ class TipoSanguineoDeleteView(DeleteView):
     model = TipoSanguineo
     template_name = 'TipoSanguineo/tiposanguineo_eliminar.html'
     success_url = reverse_lazy('tiposanguineo_listar')
+
+
+class FacturacionListView(ListView):
+    model = Facturacion
+    template_name = 'Facturacion/facturacion_listar.html'  
+    context_object_name = 'facturas'
+    login_url = 'base/login' 
+
+class FacturacionCreateView(CreateView):
+    model = Facturacion
+    form_class = FacturacionForm
+    template_name = 'Facturacion/facturacion_crear.html'  
+    success_url = reverse_lazy('facturacion_listar')  
+
+class FacturacionDetailView(DetailView):
+    model = Facturacion
+    template_name = 'Facturacion/facturacion_detalle.html'  
+    context_object_name = 'factura'  
+
+class FacturacionUpdateView(UpdateView):
+    model = Facturacion
+    form_class = FacturacionForm
+    template_name = 'Facturacion/facturacion_editar.html' 
+    context_object_name = 'factura'  
+
+    def get_success_url(self):
+        return reverse_lazy('facturacion_detalle', kwargs={'pk': self.object.pk})  
+    
+class FacturacionDeleteView(DeleteView):
+    model = Facturacion
+    template_name = 'Facturacion/facturacion_eliminar.html'  
+    context_object_name = 'factura'  
+    success_url = reverse_lazy('facturacion_listar')

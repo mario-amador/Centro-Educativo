@@ -1,7 +1,7 @@
 import re
 from django import forms
 from django.forms import Select, DateInput
-from .models import Usuario ,Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI
+from .models import Usuario ,Alumno,Empleado,Catedratico, ExpedienteEscolar, Grado, Municipio,Tutor,Asignatura,Matricula,Reportes,ExpedienteMedico, HorariosNivelEducativo, NivelEducativo, ParcialesAcademicos, NotasAlumnos, Departamento, ParametrosSAR, Pagos, Meses, CategoriaEmpleado, DocumentoDPI, Facturacion
 from datetime import datetime 
 import re
 from django import forms
@@ -486,6 +486,15 @@ class AsignaturaForm(forms.ModelForm):
                 attrs={'class': 'form-control'}),
         }
 
+    def clean_Asignatura(self):
+        asignatura = self.cleaned_data.get('Asignatura')
+        solo_letras_validator(asignatura)
+        no_campos_vacios_validator(asignatura)
+        no_dos_espacios_validator(asignatura)
+        no_numeros_validator(asignatura)
+        no_tres_letras_iguales_validator(asignatura)
+        return asignatura.capitalize()
+
 class MatriculaForm(forms.ModelForm):
     class Meta:
         model = Matricula
@@ -529,6 +538,29 @@ class ReportesForm(forms.ModelForm):
                        'placeholder': 'YYYY-MM-DD', 
                        'type': 'date'}),
         }
+
+    def clean_FechaReporte(self):
+        fecha_reporte = self.cleaned_data.get('FechaReporte')
+        fecha_rango_validator(fecha_reporte)
+        return fecha_reporte
+    
+    def clean_DescripcionReporte(self):
+        descripcion_reporte = self.cleaned_data.get('DescripcionReporte')
+        solo_letras_validator(descripcion_reporte)
+        no_campos_vacios_validator(descripcion_reporte)
+        no_dos_espacios_validator(descripcion_reporte)
+        no_numeros_validator(descripcion_reporte)
+        no_tres_letras_iguales_validator(descripcion_reporte)
+        return descripcion_reporte.capitalize()
+    
+    def clean_TipoReporte(self):
+        tipo_reporte = self.cleaned_data.get('TipoReporte')
+        solo_letras_validator(tipo_reporte)
+        no_campos_vacios_validator(tipo_reporte)
+        no_dos_espacios_validator(tipo_reporte)
+        no_numeros_validator(tipo_reporte)
+        no_tres_letras_iguales_validator(tipo_reporte)
+        return tipo_reporte.capitalize()
     
 class ExpedienteMedicoForm(forms.ModelForm):
     class Meta:
@@ -581,6 +613,78 @@ class ExpedienteMedicoForm(forms.ModelForm):
                        'pattern':'[a-zA-Z].{2,20}',}),
         }
 
+    def clean_EnfermedadCronica1(self):
+        enfermedad_cronica1 = self.cleaned_data.get('EnfermedadCronica3')
+        solo_letras_validator(enfermedad_cronica1)
+        no_campos_vacios_validator(enfermedad_cronica1)
+        no_dos_espacios_validator(enfermedad_cronica1)
+        no_numeros_validator(enfermedad_cronica1)
+        no_tres_letras_iguales_validator(enfermedad_cronica1)
+        return enfermedad_cronica1.capitalize()
+    
+    def clean_EnfermedadCronica2(self):
+        enfermedad_cronica2 = self.cleaned_data.get('EnfermedadCronica3')
+        solo_letras_validator(enfermedad_cronica2)
+        no_campos_vacios_validator(enfermedad_cronica2)
+        no_dos_espacios_validator(enfermedad_cronica2)
+        no_numeros_validator(enfermedad_cronica2)
+        no_tres_letras_iguales_validator(enfermedad_cronica2)
+        return enfermedad_cronica2.capitalize()
+    
+    def clean_EnfermedadCronica3(self):
+        enfermedad_cronica3 = self.cleaned_data.get('EnfermedadCronica3')
+        solo_letras_validator(enfermedad_cronica3)
+        no_campos_vacios_validator(enfermedad_cronica3)
+        no_dos_espacios_validator(enfermedad_cronica3)
+        no_numeros_validator(enfermedad_cronica3)
+        no_tres_letras_iguales_validator(enfermedad_cronica3)
+        return enfermedad_cronica3.capitalize()
+    
+    def clean_MedicamentoUsoDiario1(self):
+        medicamento_uso_diario1 = self.cleaned_data.get('MedicamentoUsoDiario1')
+        solo_letras_validator(medicamento_uso_diario1)
+        no_campos_vacios_validator(medicamento_uso_diario1)
+        no_dos_espacios_validator(medicamento_uso_diario1)
+        no_numeros_validator(medicamento_uso_diario1)
+        no_tres_letras_iguales_validator(medicamento_uso_diario1)
+        return medicamento_uso_diario1.capitalize()
+    
+    def clean_MedicamentoUsoDiario2(self):
+        medicamento_uso_diario2 = self.cleaned_data.get('MedicamentoUsoDiario2')
+        solo_letras_validator(medicamento_uso_diario2)
+        no_campos_vacios_validator(medicamento_uso_diario2)
+        no_dos_espacios_validator(medicamento_uso_diario2)
+        no_numeros_validator(medicamento_uso_diario2)
+        no_tres_letras_iguales_validator(medicamento_uso_diario2)
+        return medicamento_uso_diario2.capitalize()
+    
+    def clean_Alergia1(self):
+        alergia1 = self.cleaned_data.get('Alergia1')
+        solo_letras_validator(alergia1)
+        no_campos_vacios_validator(alergia1)
+        no_dos_espacios_validator(alergia1)
+        no_numeros_validator(alergia1)
+        no_tres_letras_iguales_validator(alergia1)
+        return alergia1.capitalize()
+    
+    def clean_Alergia2(self):
+        alergia2 = self.cleaned_data.get('Alergia2')
+        solo_letras_validator(alergia2)
+        no_campos_vacios_validator(alergia2)
+        no_dos_espacios_validator(alergia2)
+        no_numeros_validator(alergia2)
+        no_tres_letras_iguales_validator(alergia2)
+        return alergia2.capitalize()
+    
+    def clean_Alergia3(self):
+        alergia3 = self.cleaned_data.get('Alergia3')
+        solo_letras_validator(alergia3)
+        no_campos_vacios_validator(alergia3)
+        no_dos_espacios_validator(alergia3)
+        no_numeros_validator(alergia3)
+        no_tres_letras_iguales_validator(alergia3)
+        return alergia3.capitalize()
+
 class HorariosForm(forms.ModelForm):
     class Meta:
         model = HorariosNivelEducativo
@@ -615,6 +719,16 @@ class NivelesForm(forms.ModelForm):
             'Horario': forms.Select(
                 attrs={'class': 'form-control'}),
         }
+
+    def clean_NivelEducativo(self):
+        nivel_educativo = self.cleaned_data.get('NivelEducativo')
+        solo_letras_validator(nivel_educativo)
+        no_campos_vacios_validator(nivel_educativo)
+        no_dos_espacios_validator(nivel_educativo)
+        no_numeros_validator(nivel_educativo)
+        no_tres_letras_iguales_validator(nivel_educativo)
+        no_numeros_ni_especiales_validator(nivel_educativo)
+        return nivel_educativo.capitalize()
 
 class ParcialesForm(forms.ModelForm):
     class Meta:
@@ -890,10 +1004,20 @@ class GradoForm(forms.ModelForm):
         widgets = {
             'Grado': forms.TextInput(
                 attrs={'class': 'form-control',
-                       'pattern':'[a-zA-Z].{4,20}',}),
+                       }),
             'NivelEducativo': forms.Select(
                 attrs={'class': 'form-control'}),
         }
+
+    def clean_Grado(self):
+        grado = self.cleaned_data.get('Grado')
+        solo_letras_validator(grado)
+        no_campos_vacios_validator(grado)
+        no_dos_espacios_validator(grado)
+        no_numeros_validator(grado)
+        no_tres_letras_iguales_validator(grado)
+        return grado.capitalize()
+    
 
 class ExpedienteEscolarForm(forms.ModelForm):
     class Meta:
@@ -1012,6 +1136,16 @@ class MensualidadForm(forms.ModelForm):
                 attrs={'class': 'form-control'}),
             
         }
+
+    def clean_Meses(self):
+        mes = self.cleaned_data.get('Meses')
+        solo_letras_validator(mes)
+        no_campos_vacios_validator(mes)
+        no_dos_espacios_validator(mes)
+        no_numeros_validator(mes)
+        no_tres_letras_iguales_validator(mes)
+        return mes.capitalize()
+    
 class ParametrosSARForm(forms.ModelForm):
     class Meta:
         model = ParametrosSAR
@@ -1054,8 +1188,17 @@ class CategoriaForm(forms.ModelForm):
         widgets = {
             'CategoriaEmpleado': forms.TextInput(
                 attrs={'class': 'form-control'}),
-            
         }
+
+    def clean_CategoriaEmpleado(self):
+        categoria_empleado = self.cleaned_data.get('CategoriaEmpleado')
+        solo_letras_validator(categoria_empleado)
+        no_campos_vacios_validator(categoria_empleado)
+        no_dos_espacios_validator(categoria_empleado)
+        no_numeros_validator(categoria_empleado)
+        no_tres_letras_iguales_validator(categoria_empleado)
+        return categoria_empleado.capitalize()
+    
 class DocumentoForm(forms.ModelForm):
     class Meta:
         model = DocumentoDPI
@@ -1082,8 +1225,16 @@ class TipoPagoForm(forms.ModelForm):
             'PrecioPago': forms.NumberInput(
                  attrs={'class': 'form-control',
                         'step':'.1'}),
-
             }
+        
+    def clean_TipoPago(self):
+        tipopago = self.cleaned_data.get('TipoPago')
+        solo_letras_validator(tipopago)
+        no_campos_vacios_validator(tipopago)
+        no_dos_espacios_validator(tipopago)
+        no_numeros_validator(tipopago)
+        no_tres_letras_iguales_validator(tipopago)
+        return tipopago.capitalize()
         
 class TipoSanguineoForm(forms.ModelForm):
     class Meta:
@@ -1095,8 +1246,17 @@ class TipoSanguineoForm(forms.ModelForm):
         widgets = {
             'TipoSanguineo': forms.TextInput(
                 attrs={'class': 'form-control'}),
-            
         }
+
+    def clean_TipoSanguineo(self):
+        tipo_sanguineo = self.cleaned_data.get('TipoSanguineo')
+        solo_letras_validator(tipo_sanguineo)
+        no_campos_vacios_validator(tipo_sanguineo)
+        no_dos_espacios_validator(tipo_sanguineo)
+        no_numeros_validator(tipo_sanguineo)
+        no_tres_letras_iguales_validator(tipo_sanguineo)
+        return tipo_sanguineo.capitalize()
+    
 class TipoReporteForm(forms.ModelForm):
     class Meta:
         model = TipoReporte
@@ -1106,6 +1266,47 @@ class TipoReporteForm(forms.ModelForm):
         }
         widgets = {
             'TipoReporte': forms.TextInput(
-                attrs={'class': 'form-control'}),
-            
+                attrs={'class': 'form-control'}),   
+        }
+
+    def clean_TipoReporte(self):
+        categoria_empleado = self.cleaned_data.get('CategoriaEmpleado')
+        solo_letras_validator(categoria_empleado)
+        no_campos_vacios_validator(categoria_empleado)
+        no_dos_espacios_validator(categoria_empleado)
+        no_numeros_validator(categoria_empleado)
+        no_tres_letras_iguales_validator(categoria_empleado)
+        return categoria_empleado.capitalize()
+    
+class FacturacionForm(forms.ModelForm):
+    class Meta:
+        model = Facturacion
+        fields = ['NumeroFactura', 'Fecha', 'ParametrosSAR', 'CentroEducativo', 'Pagos', 'ImporteExonerado', 'ImporteExcento', 'ImporteGravado15', 'ImporteGravado18', 'ImpuestoSobreVenta15', 'ImpuestoSobreVenta18', 'Total']
+        labels = {
+            'NumeroFactura': 'Número de Factura',
+            'Fecha': 'Fecha',
+            'ParametrosSAR': 'Parámetros SAR',
+            'CentroEducativo': 'Nombre del Centro Educativo',
+            'Pagos': 'Pagos',
+            'ImporteExonerado': 'Importe Exonerado',
+            'ImporteExcento': 'Importe Excento',
+            'ImporteGravado15': 'Importe Gravado 15%',
+            'ImporteGravado18': 'Importe Gravado 18%',
+            'ImpuestoSobreVenta15': 'Impuesto sobre Venta 15%',
+            'ImpuestoSobreVenta18': 'Impuesto sobre Venta 18%',
+            'Total': 'Total',
+        }
+        widgets = {
+            'NumeroFactura': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Número de Factura'}),
+            'Fecha': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'dd/mm/aaaa'}),
+            'ParametrosSAR': forms.Select(attrs={'class': 'form-control'}),
+            'CentroEducativo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Centro Educativo'}),
+            'Pagos': forms.Select(attrs={'class': 'form-control'}),
+            'ImporteExonerado': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Importe Exonerado'}),
+            'ImporteExcento': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Importe Excento'}),
+            'ImporteGravado15': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Importe Gravado 15%'}),
+            'ImporteGravado18': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Importe Gravado 18%'}),
+            'ImpuestoSobreVenta15': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Impuesto sobre Venta 15%'}),
+            'ImpuestoSobreVenta18': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Impuesto sobre Venta 18%'}),
+            'Total': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Total'}),
         }

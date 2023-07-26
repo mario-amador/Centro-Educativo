@@ -158,13 +158,13 @@ class Grado(models.Model):
     Grado = models.CharField(max_length=25)
     NivelEducativo = models.ForeignKey(NivelEducativo, on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return self.Grado
 
 class Seccion(models.Model):
     Seccion = models.CharField(max_length=1)
 
-    def _str_(self):
+    def __str__(self):
         return self.Seccion
 
 

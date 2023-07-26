@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+
+<div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        <h1>¿Estás seguro de que deseas eliminar este mes</h1>
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="Id" value="{{ meses.id }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Mes:</label>
+            <input type="text" id="mes" name="meses" value="{{ meses.Meses }}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'meses_listar' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+
+    <script>
+        function mensaje() {
+            alert("¿Seguro que desea eliminar?");
+        }
+    </script>
+</div>
+{% endblock pagina_contenido %}
