@@ -163,7 +163,7 @@ urlpatterns = [
     path('tiposanguineo/eliminar/<int:pk>/', TipoSanguineoDeleteView.as_view(), name='tiposanguineo_eliminar'),
 
     path('facturacion/', FacturacionListView.as_view(), name='facturacion_listar'),
-    path('facturacion/agregar/', FacturacionCreateView.as_view(), name='facturacion_agregar'),
+    path('facturacion/agregar/', FacturacionCreateView.as_view(), name='facturacion_crear'),
     path('facturacion/<int:pk>/', FacturacionDetailView.as_view(), name='facturacion_detalle'),
     path('facturacion/<int:pk>/editar/', FacturacionUpdateView.as_view(), name='facturacion_editar'),
     path('facturacion/<int:pk>/eliminar/', FacturacionDeleteView.as_view(), name='facturacion_eliminar'),

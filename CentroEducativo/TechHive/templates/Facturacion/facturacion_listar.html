@@ -323,7 +323,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                 aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">ACCIONES:</div>
-                <a class="dropdown-item" href="{% url 'factura_crear' %}">Nuevo Grado</a>
+                <a class="dropdown-item" href="{% url 'facturacion_crear' %}">Nuevo Grado</a>
                 <a class="dropdown-item" href="{%  url 'bienvenida_administrador' %}">Home</a>
             </div>
         </div>
@@ -337,7 +337,17 @@
                     <tr>
                         <th>ID</th>
                         <th>Numero de Factura</th>
-                        <th>Nivel Educativo</th>
+                        <th>Fecha</th>
+                        <th>Parametros SAR</th>
+                        <th>Centro Educativo</th>
+                        <th>Pagos</th>
+                        <th>ImporteExonerado</th>
+                        <th>ImporteExcento</th>
+                        <th>ImporteGravado15</th>
+                        <th>ImporteGravado18</th>
+                        <th>ImpuestoSobreVenta18</th>
+                        <th>ImpuestoSobreVenta15</th>
+                        <th>Total</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
