@@ -346,30 +346,6 @@
             <i class="fas fa-times"></i> Cancelar</a>
         </form>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
-        <script>
-          document.querySelector('form').addEventListener('submit', function(event) {
-            // Realiza las validaciones y guarda el formulario
-    
-            // Simulando el guardado exitoso del formulario
-            var formularioGuardadoExitosamente = true;
-    
-            if (formularioGuardadoExitosamente) {
-              event.preventDefault();
-    
-              var successMessage = "El municipio se ha guardado correctamente.";
-              Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: successMessage,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // Redirige a la página de listado de alumnos
-                  window.location.href = "{% url 'municipio_listar' %}";
-                }
-              });
-            }
-          });
-        </script>
       </body>
     </div>
     </div>

@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% block pagina_contenido %}
+
+<div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        <h1>¿Estás seguro de que deseas eliminar el Municipio?</h1>
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="Id" value="{{ municipio.id }}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Municipio:</label>
+            <input type="text" id="muni" name="Municipio" value="{{ municipio.nombreMunicipio}}" class="form-control" disabled readonly>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Departamento:</label>
+            <input type="text" id="dep" name="Depa" value="{{ municipio.Departamento_id}}" class="form-control" disabled readonly>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-danger" type="submit" onclick="mensaje();"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'municipio_listar' %}"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    </form>
+
+    <script>
+        function mensaje() {
+            alert("¿Seguro que desea eliminar?");
+        }
+    </script>
+</div>
+{% endblock pagina_contenido %}

@@ -5,6 +5,93 @@ from django.db import models
 from django import forms
 from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser
+from django.core.validators import RegexValidator
+ValidacionNumeros = RegexValidator(r'^[a-zA-ZñÑ áéíóúÁÉÍÓÚ ]*$',"No se puede ingresar números a este campo.")
+ValidacionLetras = RegexValidator(r'^[0-9 ]*$',"No se puede ingresar letras a este campo.")
+ValidacionTelefono = RegexValidator(r'^[[2,3,7,8,9]{1}[0-9]{3}[0-9]{4}]*$',
+                         "No puede ingresar letras en este campo, este campo debe comenzar con 2,3,8,9, este campo debe tener 8 a 11 digitos")
+
+
+
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
+
+def no_dos_espacios_validator(value):
+    if '  ' in value:
+        raise forms.ValidationError('No se permiten dos espacios en blanco seguidos.')
+
+def no_tres_letras_iguales_validator(value):
+    for i in range(len(value) - 2):
+        if value[i] == value[i+1] == value[i+2]:
+            raise forms.ValidationError('No se permiten tres letras iguales seguidas.')
+
+def no_numeros_validator(value):
+    if any(char.isdigit() for char in value):
+        raise forms.ValidationError('No se permiten números en este campo.')
+    
+def no_dos_espacios_validator(value):
+    if '  ' in value:
+        raise forms.ValidationError('No se permiten dos espacios en blanco seguidos.')
+
+def no_tres_letras_iguales_validator(value):
+    for i in range(len(value) - 2):
+        if value[i] == value[i+1] == value[i+2]:
+            raise forms.ValidationError('No se permiten tres letras iguales seguidas.')
+
+def no_numeros_validator(value):
+    if any(char.isdigit() for char in value):
+        raise models.ValidationError('Este campo no debe contener números.')
+
+def no_letras_validator(value):
+    if any(char.isalpha() for char in value):
+        raise models.ValidationError('Este campo no debe contener letras.')
+
+def no_dos_espacios_validator(value):
+    if '  ' in value:
+        raise ValidationError('No se permiten dos espacios en blanco seguidos.')
+
+def no_tres_letras_iguales_validator(value):
+    for i in range(len(value) - 2):
+        if value[i] == value[i+1] == value[i+2]:
+            raise ValidationError('No se permiten tres letras iguales seguidas.')
+
+def no_repita_nombre_validator(value):
+    if Empleado.objects.filter(NombresEmpleado__iexact=value).exists():
+        raise ValidationError('Este nombre ya existe en la base de datos.')
+
+def telefono_validator(value):
+    if not value.isdigit():
+        raise ValidationError('El teléfono debe contener solo dígitos numéricos.')
+
+    if len(value) != 8:
+        raise ValidationError('El teléfono debe tener 8 dígitos.')
+
+    if not value.startswith(('9', '8', '3')):
+        raise ValidationError('El teléfono debe iniciar con 9, 8 o 3.')
+
+def dni_validator(value):
+    if not value.isdigit():
+        raise ValidationError('El DNI debe contener solo dígitos numéricos.')
+
+    if len(value) != 13:
+        raise ValidationError('El DNI debe tener 13 dígitos.')
+
+    if Empleado.objects.filter(DPI=value).exists():
+        raise ValidationError('Este DNI ya existe en la base de datos.')
+
+def rtn_validator(value):
+    if not value.isdigit():
+        raise ValidationError('El RTN debe contener solo dígitos numéricos.')
+
+    if len(value) != 14:
+        raise ValidationError('El RTN debe tener 14 dígitos.')
+
+def pasaporte_validator(value):
+    if not value.isalnum():
+        raise ValidationError('El pasaporte debe contener solo caracteres alfanuméricos.')
+
+    if len(value) != 20:
+        raise ValidationError('El pasaporte debe tener 20 caracteres.')
 
 
 class Rol(models.Model):
@@ -15,7 +102,7 @@ class Rol(models.Model):
 
 class Usuario(AbstractBaseUser):
     username = models.CharField(max_length=150, unique=True)
-    password = models.CharField(max_length=128)
+    password = models.CharField(max_length=128, help_text="La contraseña debe tener al menos 8 caracteres y contener al menos un número, una letra mayúscula y una letra minúscula.")
     rol = models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True)
     intentos_fallidos = models.IntegerField(default=0)
     activo = models.BooleanField(default=True)
@@ -24,9 +111,9 @@ class Usuario(AbstractBaseUser):
 
 
 class Departamento(models.Model):
-    idDepartamento= models.AutoField(primary_key=True, unique=True, null= False)
-    Departamento = models.CharField(max_length=100)
-    
+    idDepartamento = models.AutoField(primary_key=True, unique=True, null=False)
+    Departamento = models.CharField(max_length=100, validators=[RegexValidator(r'^[a-zA-ZñÑ áéíóúÁÉÍÓÚ ]*$', "No se puede ingresar números a este campo.")])
+
 
     def __str__(self):
         return self.Departamento
@@ -71,13 +158,13 @@ class Grado(models.Model):
     Grado = models.CharField(max_length=25)
     NivelEducativo = models.ForeignKey(NivelEducativo, on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return self.Grado
 
 class Seccion(models.Model):
     Seccion = models.CharField(max_length=1)
 
-    def _str_(self):
+    def __str__(self):
         return self.Seccion
 
 
@@ -147,7 +234,10 @@ class CategoriaEmpleado(models.Model):
 
 
 class Empleado(models.Model):
-    NombresEmpleado = models.CharField(max_length=20, help_text='No debe contener numeros, caracteres 3-20 ')
+    NombresEmpleado = models.CharField(max_length=20, validators=[
+        RegexValidator(r'^[^\d]{3,20}$', 'No debe contener números, caracteres: 3-20'),
+        no_numeros_validator
+    ])
     ApellidosEmpleado = models.CharField(max_length=30, help_text='No debe contener numeros, caracteres 2-30 ')
     DocumentoDPI = models.ForeignKey(DocumentoDPI, on_delete=models.CASCADE)
     DPI = models.CharField(max_length=20,  help_text='No, debe contenes letras, digitos: 13-15 ')

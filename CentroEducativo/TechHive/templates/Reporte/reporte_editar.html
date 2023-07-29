@@ -1,5 +1,3 @@
-
-
 {% extends "base/base.html" %}
 {% block barra_izquierda %}
 <!-- Page Wrapper -->
@@ -317,7 +315,7 @@
     <!-- Card Header - Dropdown -->
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Editar Reporter</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Editar Reporte</h6>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -336,19 +334,44 @@
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Actualizar Reportes</title>
+        <title>Editar Reporte</title>
       </head>
       <body>
         <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-success">
-            <i class="fas fa-save"></i>Guardar</button>
-          <a href="{% url 'reporte_listar' %}" class="btn btn-secondary">
-            <i class="fas fa-times"></i> Cancelar</a>
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error de validación:</strong>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <a href="{% url 'reporte_listar' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
         </form>
-      </body>
+        
+        </div>
+      </div>
     </div>
-    </div>
-    {% endblock pagina_contenido %}
-    </html>
+    <!-- Agrega aquí tus enlaces a scripts JS si los tienes -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+  </body>
+</div>
+</div>
+{% endblock pagina_contenido %}
+</html>

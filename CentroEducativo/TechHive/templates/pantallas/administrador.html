@@ -584,7 +584,37 @@
             </a>
         </div>
     </div>
- </div> 
+ </div>
+ <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary"> Facturación</h6>
+        <div class="dropdown no-arrow justify-content-end">
+            <a class="dropdown-item mr-4" href="{% url 'facturacion_crear' %}">
+                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
+                Agregar Facturación
+            </a>
+            <a class="dropdown-item mr-4" href="{% url 'facturacion_listar' %}">
+                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
+                Listar Facturación
+            </a>
+        </div>
+    </div>
+ </div>
+ <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary"> Tipo Sanguineo</h6>
+        <div class="dropdown no-arrow justify-content-end">
+            <a class="dropdown-item mr-4" href="{% url 'tiposanguineo_crear' %}">
+                <i class="fas fa-user-plus fa-lg fa-fw mr-2 text-gray-400"></i>
+                Agregar Tipo Sanguineo
+            </a>
+            <a class="dropdown-item mr-4" href="{% url 'tiposanguineo_listar' %}">
+                <i class="fas fa-users fa-lg fa-fw mr-2 text-gray-400"></i>
+                Listar Tipos Sanguineo
+            </a>
+        </div>
+    </div>
+ </div>
           
 </body>
     
